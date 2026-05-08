@@ -1,0 +1,46 @@
+SELECT
+    employee_attrition.employeenumber,
+    employee_attrition.attrition,
+    employee_attrition.overtime,
+    jobrole,
+    department,
+    gender,
+    CASE
+        WHEN age  < 25 THEN 'Below 25'
+        WHEN  age BETWEEN 25 AND 34 THEN '25-34'
+        WHEN age BETWEEN 35 AND 44 THEN '35-44'
+        WHEN age BETWEEN 45 AND 54 THEN '45-54'
+            ELSE '55+' END AS Group_age,
+    CASE
+        WHEN age  < 25 THEN 1
+        WHEN  age BETWEEN 25 AND 34 THEN 2
+        WHEN age BETWEEN 35 AND 44 THEN 3
+        WHEN age BETWEEN 45 AND 54 THEN 4
+            ELSE 5  END AS Group_age2,
+    CASE
+        WHEN yearsatcompany <= 1 THEN 'Below 1 year experience'
+        WHEN yearsatcompany BETWEEN 2 AND 5 THEN '2-5 years experience'
+        WHEN yearsatcompany BETWEEN 6 AND 10 THEN '6-10 years experience'
+            ELSE '+10 years experience' END AS experience_years,
+    CASE
+        WHEN jobinvolvement = 1 THEN 'low involvement'
+        WHEN jobinvolvement = 2 THEN 'regular involvement'
+        WHEN jobinvolvement = 3 THEN 'medium involvement'
+            ELSE 'high involvement' END AS involvement_rate,
+    CASE
+        WHEN distancefromhome <= 5 THEN '0-5 km'
+        WHEN distancefromhome BETWEEN 6 AND 15 THEN '6-15 km'
+            ELSE 'Above 15 km' END AS distance_to_work,
+    CASE
+        WHEN percentsalaryhike < 13 THEN 'Low salaryhike'
+        WHEN percentsalaryhike BETWEEN 13 AND 18 THEN 'Medium salaryhike'
+            ELSE 'High salaryhike' END AS salaryhike_rating,
+    CASE
+        WHEN performancerating = 3 THEN '3 - Excellent'
+        WHEN performancerating = 4 THEN '4 - Outstanding'
+            END AS performance_text
+
+FROM
+    employee_attrition;
+
+
